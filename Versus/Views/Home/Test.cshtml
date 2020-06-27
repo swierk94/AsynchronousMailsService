@@ -1,0 +1,19 @@
+﻿
+<link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
+
+<!-- Bootstrap core CSS -->
+<link href="~/assets/dist/css/bootstrap.css" rel="stylesheet" />
+
+<!-- Custom styles for this template -->
+@*<link href="~/Content/carousel.css" rel="stylesheet" />*@
+
+<body class="bg-dark">
+    <img class="rounded-circle center-block" src="~/Img/football-bettingM3.jpg" />
+
+    <h2 class="text-center">Obstawiłeś:  @TempData["SM"]  w meczu Niemcy vs Rosja</h2>
+
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Powrót", "Index", "Home", new { @class = "btn-my" })
+        @*<input type="submit" value="Powrót" class="btn btn-secondary center-block" />*@
+    </div>
+</body>
