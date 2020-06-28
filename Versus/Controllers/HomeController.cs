@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
 using System.Web.Mvc;
+using System.Web.WebPages;
 using Versus.Models;
 using Versus.Models.Data;
 using Versus.ViewModels;
@@ -13,6 +15,8 @@ namespace Versus.Controllers
 {
     public class HomeController : Controller
     {
+
+
         #region TODO Methods
         public ActionResult Index()
         {
@@ -30,8 +34,12 @@ namespace Versus.Controllers
         {
             ScoresVM model = new ScoresVM
             {
+
+
                 Choices = ScoresGenerate()
             };
+
+
             return View(model);
         }
 
@@ -43,11 +51,9 @@ namespace Versus.Controllers
         #endregion
 
 
-
-
         // POST: SaveScore
         [HttpPost]
-        public async Task<ActionResult> SaveScore(ScoresVM model)
+        public ActionResult SaveScore(ScoresVM model)
         {
 
             // Sprawdzenia model state
@@ -56,13 +62,22 @@ namespace Versus.Controllers
                 return View(model);
             }
 
+            // zmniejszenie wyników meczu o jeden
+            --model.Score1;
+            --model.Score2;
+
+            // Pobranie id użytkownika
+            model.GameId = User.Identity.GetUserId();
+
+            // Generowanie daty oddania głosu
+            model.Betdate = DateTime.Now.ToString();
+            
+
             using (Db db = new Db())
             {
 
                 // Inicjalizacja PageDTO
                 ScoresDTO dto = new ScoresDTO();
-                --model.Score1;
-                --model.Score2;
 
                 ///////////////////
                 #region TO USE VALIDATION
@@ -82,10 +97,10 @@ namespace Versus.Controllers
                 //    ModelState.AddModelError("", "Ten tytuł lub adres strony już istnieje.");
                 //    return View(model);
                 //}
-                #endregion 
+                #endregion
                 ///////////////////
-                
-                dto.Score1 =  model.Score1;
+
+                dto.Score1 = model.Score1;
                 dto.Score2 = model.Score2;
                 dto.GameId = model.GameId;
                 dto.BetDate = model.Betdate;
@@ -93,7 +108,7 @@ namespace Versus.Controllers
 
                 // zapis DTO
                 db.Scores.Add(dto);
-                await db.SaveChangesAsync();
+                db.SaveChanges();
             }
 
             //utworzenie zmiennej sesyjnej
@@ -109,7 +124,7 @@ namespace Versus.Controllers
         {
             //pobranie danych z sesji
 
-            string score =  (string)Session["score"];
+            string score = (string)Session["score"];
 
             TempData["SM"] = score;
 
@@ -120,7 +135,7 @@ namespace Versus.Controllers
         [HttpGet]
         public IEnumerable<SelectListItem> ScoresGenerate()
         {
-           
+
 
             List<SelectListItem> choices = new List<SelectListItem>
                {
@@ -132,10 +147,10 @@ namespace Versus.Controllers
                 choices.Add
                     (
                     new SelectListItem
-                        {
-                            Text = i.ToString(),
-                            Value = (i+1).ToString()
-                        }
+                    {
+                        Text = i.ToString(),
+                        Value = (i + 1).ToString()
+                    }
                     );
             }
 

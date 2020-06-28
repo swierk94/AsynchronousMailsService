@@ -1,4 +1,6 @@
 ﻿@model Versus.ViewModels.ScoresVM
+@using Microsoft.AspNet.Identity
+
 <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/carousel/">
 
 <!-- Bootstrap core CSS -->
@@ -7,6 +9,15 @@
 <!-- Custom styles for this template -->
 <link href="~/Content/carousel.css" rel="stylesheet" />
 <link href="~/Content/Site.css" rel="stylesheet" />
+
+@if (Request.IsAuthenticated)
+{
+
+        @Html.AntiForgeryToken()
+        @User.Identity.GetUserId()
+
+}
+
 
 <div>
     @using (@Html.BeginForm("SaveScore", "Home", FormMethod.Post))
