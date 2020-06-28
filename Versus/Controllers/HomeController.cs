@@ -70,7 +70,7 @@ namespace Versus.Controllers
             model.GameId = User.Identity.GetUserId();
 
             // Generowanie daty oddania głosu
-            model.Betdate = DateTime.Now.ToString();
+            model.Betdate = DateTime.Now;
             
 
             using (Db db = new Db())

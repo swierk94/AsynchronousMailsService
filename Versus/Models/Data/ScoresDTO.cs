@@ -12,7 +12,7 @@ namespace Versus.Models.Data
         public int Score1 { get; set; }
         public int Score2 { get; set; }
         public string GameId { get; set; }
-        public string BetDate { get; set; }
+        public DateTime BetDate { get; set; }
         public int UserId { get; set; }
     }
 }

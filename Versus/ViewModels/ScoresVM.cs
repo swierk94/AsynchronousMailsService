@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Versus.Models.Data;
@@ -31,7 +32,7 @@ namespace Versus.ViewModels
         // [Required]
         public string GameId { get; set; }
         // [Required]
-        public string Betdate { get; set; }
+        public DateTime Betdate { get; set; }
         // [Required]
         public int UserId { get; set; }
 

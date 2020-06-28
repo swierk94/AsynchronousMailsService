@@ -13,45 +13,52 @@
 @if (Request.IsAuthenticated)
 {
 
-        @Html.AntiForgeryToken()
-        @User.Identity.GetUserId()
 
-}
+    @User.Identity.GetUserId()
 
 
-<div>
-    @using (@Html.BeginForm("SaveScore", "Home", FormMethod.Post))
-    {
-        <div class="container">
 
-            <!-- Three columns of text below the carousel -->
-            <div class="col-md-4">
-                <img class="bd-placeholder-img rounded-circle center-block " width="300" height="300" src="~/Img/Flag_of_germany_800_480.png" />
-                <h2>Niemcy</h2>
+    @Html.AntiForgeryToken()
+    <div>
+        @using (@Html.BeginForm("SaveScore", "Home", FormMethod.Post))
+        {
+            <div class="container">
+
+                <!-- Three columns of text below the carousel -->
+                <div class="col-md-4">
+                    <img class="bd-placeholder-img rounded-circle center-block " width="300" height="300" src="~/Img/Flag_of_germany_800_480.png" />
+                    <h2>Niemcy</h2>
 
 
-                @Html.DropDownListFor(m => m.Score1, new SelectList(Model.Choices, "Value", "Text"), new { @class = "btn btn-secondary" })
+                    @Html.DropDownListFor(m => m.Score1, new SelectList(Model.Choices, "Value", "Text"), new { @class = "btn btn-secondary" })
 
 
-            </div>
-            <div class="col-xs-4">
-                <div class="textpadding">
-                    VS
                 </div>
-                <input type="submit" value="Obstaw to!" class="btn btn-success" />
+                <div class="col-xs-4">
+                    <div class="textpadding">
+                        VS
+                    </div>
+                    <input type="submit" value="Obstaw to!" class="btn btn-success" />
+                </div>
+                <div class="col-md-4">
+                    <img class="bd-placeholder-img rounded-circle center-block " width="300" height="300" src="~/Img/russia-flag-icon-free-download.jpg" />
+                    <h2>Rosja</h2>
+                    @Html.DropDownListFor(m => m.Score2, new SelectList(Model.Choices, "Value", "Text"), new { @class = "btn btn-secondary" })
+
+                </div><!-- /.col-lg-4 -->
+
+
             </div>
-            <div class="col-md-4">
-                <img class="bd-placeholder-img rounded-circle center-block " width="300" height="300" src="~/Img/russia-flag-icon-free-download.jpg" />
-                <h2>Rosja</h2>
-                @Html.DropDownListFor(m => m.Score2, new SelectList(Model.Choices, "Value", "Text"), new { @class = "btn btn-secondary" })
-
-            </div><!-- /.col-lg-4 -->
+        }
 
 
-        </div>
-    }
-</div><!-- /.container -->
 
+    </div><!-- /.container -->
+}
+else
+{
+    @Html.ActionLink("Zaloguj się aby obstawić", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-success", id = "loginLink" })
+}
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
