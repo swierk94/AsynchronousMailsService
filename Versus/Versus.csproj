@@ -46,6 +46,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.17.0.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.17.0\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -184,6 +193,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Data\DB.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\MailService.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Data\ScoresDTO.cs" />
     <Compile Include="Models\Scores.cs">
@@ -214,6 +224,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carousel.css" />
+    <Content Include="Img\a.jpg" />
     <Content Include="Img\Flag_of_germany_800_480.png" />
     <Content Include="Img\football-bettingM3.jpg" />
     <Content Include="favicon.ico" />
@@ -308,6 +319,11 @@
     <Content Include="assets\dist\js\bootstrap.js.map" />
     <Content Include="assets\dist\js\bootstrap.min.js.map" />
     <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\MailService.cshtml" />
+    <Content Include="Views\Emails\MailService.Text.cshtml" />
+    <Content Include="Views\Emails\MailService.Html.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

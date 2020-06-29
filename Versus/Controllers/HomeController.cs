@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Caching;
@@ -20,6 +21,8 @@ namespace Versus.Controllers
         #region TODO Methods
         public ActionResult Index()
         {
+
+          //  EmailSender();
             return View();
         }
 
@@ -32,9 +35,9 @@ namespace Versus.Controllers
 
         public ActionResult Contact()
         {
+           
             ScoresVM model = new ScoresVM
             {
-
 
                 Choices = ScoresGenerate()
             };
@@ -45,7 +48,7 @@ namespace Versus.Controllers
 
         public ActionResult Test()
         {
-
+           
             return View();
         }
         #endregion
@@ -155,6 +158,21 @@ namespace Versus.Controllers
             }
 
             return new SelectList(choices, "Value", "Text");
+        }
+
+
+        public void EmailSender()
+        {
+            MailService email = new MailService();
+            email.From = "swierk94@wp.pl";
+            email.To =  "swierk94@wp.pl";
+           
+           
+            //Dołączenie obrazka do treści maila
+            Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
+            email.SomeImageContentId = someImageAttachment.ContentId;
+            email.Attach(someImageAttachment);
+            email.Send();
         }
 
     }
