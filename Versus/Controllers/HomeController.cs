@@ -67,7 +67,7 @@ namespace Versus.Controllers
             --model.Score2;
 
             // Pobranie id użytkownika
-            model.GameId = User.Identity.GetUserId();
+            model.UserId = User.Identity.GetUserId();
 
             // Generowanie daty oddania głosu
             model.Betdate = DateTime.Now;

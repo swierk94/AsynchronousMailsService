@@ -34,7 +34,7 @@ namespace Versus.ViewModels
         // [Required]
         public DateTime Betdate { get; set; }
         // [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
         public IEnumerable<SelectListItem> Choices { get; set; }
 

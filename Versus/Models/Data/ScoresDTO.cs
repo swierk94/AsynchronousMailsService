@@ -13,6 +13,6 @@ namespace Versus.Models.Data
         public int Score2 { get; set; }
         public string GameId { get; set; }
         public DateTime BetDate { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
     }
 }

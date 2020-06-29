@@ -12,12 +12,6 @@
 
 @if (Request.IsAuthenticated)
 {
-
-
-    @User.Identity.GetUserId()
-
-
-
     @Html.AntiForgeryToken()
     <div>
         @using (@Html.BeginForm("SaveScore", "Home", FormMethod.Post))
