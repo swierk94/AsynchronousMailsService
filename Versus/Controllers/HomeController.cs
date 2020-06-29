@@ -16,13 +16,10 @@ namespace Versus.Controllers
 {
     public class HomeController : Controller
     {
-
-
         #region TODO Methods
         public ActionResult Index()
         {
-
-          //  EmailSender();
+          
             return View();
         }
 
@@ -121,7 +118,7 @@ namespace Versus.Controllers
             return RedirectToAction("LoadScore");
         }
 
-        // GET: LoadScore
+        // GET: LoadScore 
         [HttpGet]
         public ActionResult LoadScore()
         {
@@ -130,8 +127,9 @@ namespace Versus.Controllers
             string score = (string)Session["score"];
 
             TempData["SM"] = score;
-
+            EmailSender();  
             return View("Test");
+
         }
 
         // GET: ScoresGenerate
@@ -163,16 +161,20 @@ namespace Versus.Controllers
 
         public void EmailSender()
         {
+          
             MailService email = new MailService();
-            email.From = "swierk94@wp.pl";
+            email.From = "swierq94@gmail.com";
             email.To =  "swierk94@wp.pl";
            
            
             //Dołączenie obrazka do treści maila
             Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
             email.SomeImageContentId = someImageAttachment.ContentId;
+            email.NumerZamowienia = (string)Session["score"];
             email.Attach(someImageAttachment);
             email.Send();
+
+         
         }
 
     }

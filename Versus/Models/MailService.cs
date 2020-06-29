@@ -17,7 +17,7 @@ namespace Versus.Models
 
         //public decimal Wartosc { get; set; }
 
-        //public int NumerZamowienia { get; set; }
+        public string NumerZamowienia { get; set; }
 
         // public List<PozycjaZamowienia> PozycjeZamowienia { get; set; }
     }
