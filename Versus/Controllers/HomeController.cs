@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using Hangfire;
+using Microsoft.AspNet.Identity;
+using Postal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,7 +22,6 @@ namespace Versus.Controllers
         #region TODO Methods
         public ActionResult Index()
         {
-          
             return View();
         }
 
@@ -127,10 +129,22 @@ namespace Versus.Controllers
             string score = (string)Session["score"];
 
             TempData["SM"] = score;
-            EmailSender();  
-            return View("Test");
+
+            //wysyłanie maili async
+            string url = Url.Action("EmailSender", "Home",new {betscore = score}, Request.Url.Scheme);
+            BackgroundJob.Enqueue(() => Call(url));
+
+
+            return RedirectToAction("Test");
 
         }
+
+        public void Call(string url)
+        {
+            var request = HttpWebRequest.Create(url);
+            request.GetResponseAsync();
+        }
+
 
         // GET: ScoresGenerate
         [HttpGet]
@@ -159,9 +173,10 @@ namespace Versus.Controllers
         }
 
 
-        public void EmailSender()
+        public ActionResult EmailSender(string betscore)
         {
-          
+            
+
             MailService email = new MailService();
             email.From = "swierq94@gmail.com";
             email.To =  "swierk94@wp.pl";
@@ -170,11 +185,12 @@ namespace Versus.Controllers
             //Dołączenie obrazka do treści maila
             Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
             email.SomeImageContentId = someImageAttachment.ContentId;
-            email.NumerZamowienia = (string)Session["score"];
+            //email.NumerZamowienia = (string)Session["score"];
+            email.NumerZamowienia = betscore;
             email.Attach(someImageAttachment);
             email.Send();
 
-         
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
     }

@@ -6,7 +6,7 @@ using Postal;
 
 namespace Versus.Models
 {
-    public class MailService:Email
+    public class MailService : Email
     {
         
         public string To { get; set; }
