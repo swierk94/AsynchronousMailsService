@@ -1,16 +1,10 @@
-﻿using Hangfire;
-using Microsoft.AspNet.Identity;
-using Postal;
+﻿using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Threading.Tasks;
-using System.Web;
-using System.Web.Caching;
 using System.Web.Mvc;
-using System.Web.WebPages;
+using Versus.Infrastructure;
 using Versus.Models;
 using Versus.Models.Data;
 using Versus.ViewModels;
@@ -19,6 +13,13 @@ namespace Versus.Controllers
 {
     public class HomeController : Controller
     {
+        private IMailService mailService;
+
+        public HomeController(IMailService mailService)
+        {
+            this.mailService = mailService;
+        }
+
         #region TODO Methods
         public ActionResult Index()
         {
@@ -130,9 +131,17 @@ namespace Versus.Controllers
 
             TempData["SM"] = score;
 
+            //mail service dependency injectiom
+            mailService.BetScoresMail(score);
+
+            //mail async 2
+            //HangFireAsyncMailService mail = new HangFireAsyncMailService();
+            //mail.BetScoresMail(score);
+
+
             //wysyłanie maili async
-            string url = Url.Action("EmailSender", "Home",new {betscore = score}, Request.Url.Scheme);
-            BackgroundJob.Enqueue(() => Call(url));
+            //string url = Url.Action("EmailSender", "Home", new { betscore = score }, Request.Url.Scheme);
+            //BackgroundJob.Enqueue(() => Call(url));
 
 
             return RedirectToAction("Test");
