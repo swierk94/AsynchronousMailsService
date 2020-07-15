@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Versus.Infrastructure;
 using Versus.Models;
 
 namespace Versus.Controllers
@@ -17,9 +18,11 @@ namespace Versus.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IMailService mailService;
 
-        public AccountController()
+        public AccountController(IMailService mailService)
         {
+            this.mailService = mailService;
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
@@ -161,7 +164,11 @@ namespace Versus.Controllers
                     // Wyślij wiadomość e-mail z tym łączem
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Potwierdź konto", "Potwierdź konto, klikając <a href=\"" + callbackUrl + "\">tutaj</a>");
+                    //await UserManager.SendEmailAsync(user.Id, "Potwierdź konto", "Potwierdź konto, klikając <a href=\"" + callbackUrl + "\">tutaj</a>");
+
+                    //testo
+                    mailService.BetScoresMail(callbackUrl);
+                    //
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -213,7 +220,8 @@ namespace Versus.Controllers
                 // Wyślij wiadomość e-mail z tym łączem
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Resetuj hasło", "Resetuj hasło, klikając <a href=\"" + callbackUrl + "\">tutaj</a>");
+                mailService.PasswordResetMail(callbackUrl,model);
+
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 

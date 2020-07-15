@@ -9,7 +9,8 @@ namespace Versus.Infrastructure
 {
     public interface IMailService
     {
-        void RegisterConfirmationMail();
+        void PasswordResetMail(string resetUrl, ForgotPasswordViewModel model);
+        void RegisterConfirmationMail(string confirmationUrl);
         void BetScoresMail(string score);
     }
 }

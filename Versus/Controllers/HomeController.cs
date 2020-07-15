@@ -13,11 +13,19 @@ namespace Versus.Controllers
 {
     public class HomeController : Controller
     {
+        public string ab ;
+
         private IMailService mailService;
 
         public HomeController(IMailService mailService)
         {
             this.mailService = mailService;
+        }
+
+        public HomeController()
+        {
+            ab = "1";
+
         }
 
         #region TODO Methods

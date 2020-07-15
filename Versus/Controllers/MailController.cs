@@ -23,12 +23,29 @@ namespace Versus.Controllers
 
             MailService email = new MailService();
             email.From = "swierq94@gmail.com";
-            email.To = "swierk94@wp.pl";
+            email.To = "swierq94@gmail.com";
             //Dołączenie obrazka do treści maila
             Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
             email.SomeImageContentId = someImageAttachment.ContentId;
             //email.NumerZamowienia = (string)Session["score"];
             email.NumerZamowienia = betscore;
+            email.Attach(someImageAttachment);
+            email.Send();
+
+
+            return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        public ActionResult PasswordResetMail(string resetUrl, string model)
+        {
+            MailService email = new MailService();
+            email.From = "swierq94@gmail.com";
+            email.To = model;
+            //Dołączenie obrazka do treści maila
+            Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\reset.jpg");
+            email.SomeImageContentId = someImageAttachment.ContentId;
+            //email.NumerZamowienia = (string)Session["score"];
+            email.NumerZamowienia = resetUrl;
             email.Attach(someImageAttachment);
             email.Send();
 

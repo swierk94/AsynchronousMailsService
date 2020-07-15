@@ -249,6 +249,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\carousel.css" />
     <Content Include="Img\a.jpg" />
+    <Content Include="Img\reset.jpg" />
     <Content Include="Img\Flag_of_germany_800_480.png" />
     <Content Include="Img\football-bettingM3.jpg" />
     <Content Include="favicon.ico" />
@@ -256,6 +257,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Img\russia-flag-icon-free-download.jpg" />
+    <Content Include="Img\tutorial-preview-small.png" />
     <Content Include="Models\ScoresModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ScoresModel.edmx</DependentUpon>
