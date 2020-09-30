@@ -1,18 +1,48 @@
 ﻿@model Versus.Models.MailService
 
     Content-Type: text/html; charset=utf-8
+<html>
 
-    Dziękuję za obstawienie!
+<head>
+    <title></title>
+</head>
+<body>
+    Witaj,
 
-    Obstawiłeś: 
-@Model.NumerZamowienia w meczu Rosja  -  Niemcy
+    <br />
+    <br />
+    @Model.Header
 
-    <html>
+    <br />
+    <br />
+    @Model.MailContent
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @Model.NumerZamowienia
 
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <img src="cid:@Model.SomeImageContentId" alt="SomeImage" />
-    </body>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <img src="cid:@Model.SomeImageContentId" alt="SomeImage" />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    Pozdrawiam,
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    @(Model.Signature)
+</body>
 </html>

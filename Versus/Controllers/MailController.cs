@@ -27,7 +27,10 @@ namespace Versus.Controllers
             //Dołączenie obrazka do treści maila
             Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
             email.SomeImageContentId = someImageAttachment.ContentId;
-            //email.NumerZamowienia = (string)Session["score"];
+            email.Header = "obstawiłeś: ";
+            email.MailContent = "";
+            email.Topic = "";
+            email.Signature = "Versus";
             email.NumerZamowienia = betscore;
             email.Attach(someImageAttachment);
             email.Send();
@@ -36,16 +39,20 @@ namespace Versus.Controllers
             return new HttpStatusCodeResult(HttpStatusCode.OK);
         }
 
-        public ActionResult PasswordResetMail(string resetUrl, string model)
+        public ActionResult PasswordResetMail(string resetUrl, string modelMail)
         {
             MailService email = new MailService();
             email.From = "swierq94@gmail.com";
-            email.To = model;
+            email.To = modelMail;
             //Dołączenie obrazka do treści maila
             Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\reset.jpg");
             email.SomeImageContentId = someImageAttachment.ContentId;
-            //email.NumerZamowienia = (string)Session["score"];
             email.NumerZamowienia = resetUrl;
+            email.Header = "zresetowałeś swoje hasło.";
+            email.MailContent = "Kliknij w poniższy link aby zresetować hasło do konta. Jeśli mail dotarł do Ciebie przypadkowo, zignoruj go";
+            email.Topic = "Resetowanie hasła - kliknij w link w wiadomości";
+            email.Signature = "Versus";
+
             email.Attach(someImageAttachment);
             email.Send();
 

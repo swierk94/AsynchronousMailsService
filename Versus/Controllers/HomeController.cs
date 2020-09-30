@@ -13,20 +13,20 @@ namespace Versus.Controllers
 {
     public class HomeController : Controller
     {
-        public string ab ;
 
         private IMailService mailService;
+
+        public HomeController()
+        {
+        }
 
         public HomeController(IMailService mailService)
         {
             this.mailService = mailService;
         }
 
-        public HomeController()
-        {
-            ab = "1";
+        
 
-        }
 
         #region TODO Methods
         public ActionResult Index()
@@ -156,11 +156,11 @@ namespace Versus.Controllers
 
         }
 
-        public void Call(string url)
-        {
-            var request = HttpWebRequest.Create(url);
-            request.GetResponseAsync();
-        }
+        //public void Call(string url)
+        //{
+        //    var request = HttpWebRequest.Create(url);
+        //    request.GetResponseAsync();
+        //}
 
 
         // GET: ScoresGenerate
@@ -190,25 +190,25 @@ namespace Versus.Controllers
         }
 
 
-        public ActionResult EmailSender(string betscore)
-        {
+        //public ActionResult EmailSender(string betscore)
+        //{
             
 
-            MailService email = new MailService();
-            email.From = "swierq94@gmail.com";
-            email.To =  "swierk94@wp.pl";
+        //    MailService email = new MailService();
+        //    email.From = "swierq94@gmail.com";
+        //    email.To =  "swierk94@wp.pl";
            
            
-            //Dołączenie obrazka do treści maila
-            Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
-            email.SomeImageContentId = someImageAttachment.ContentId;
-            //email.NumerZamowienia = (string)Session["score"];
-            email.NumerZamowienia = betscore;
-            email.Attach(someImageAttachment);
-            email.Send();
+        //    //Dołączenie obrazka do treści maila
+        //    Attachment someImageAttachment = new Attachment("C:\\Users\\Dolar\\source\\repos\\VersusRepo\\Versus\\Img\\a.jpg");
+        //    email.SomeImageContentId = someImageAttachment.ContentId;
+        //    //email.NumerZamowienia = (string)Session["score"];
+        //    email.NumerZamowienia = betscore;
+        //    email.Attach(someImageAttachment);
+        //    email.Send();
 
-            return new HttpStatusCodeResult(HttpStatusCode.OK);
-        }
+        //    return new HttpStatusCodeResult(HttpStatusCode.OK);
+        //}
 
     }
 }

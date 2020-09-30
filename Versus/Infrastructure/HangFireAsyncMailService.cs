@@ -16,11 +16,11 @@ namespace Versus.Infrastructure
             BackgroundJob.Enqueue(() => Helpers.CallUrl(url));
         }
 
-        public void PasswordResetMail(string resetUrl, ForgotPasswordViewModel model)
+        public void PasswordResetMail(string resetUrl, string modelMail)
         {
             //wysyłanie maili async
             var urlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
-            string url = urlHelper.Action("PasswordResetMail", "Mail", new { resetUrl = resetUrl, model = model.Email }, HttpContext.Current.Request.Url.Scheme);
+            string url = urlHelper.Action("PasswordResetMail", "Mail", new { resetUrl = resetUrl, modelMail = modelMail }, HttpContext.Current.Request.Url.Scheme);
 
             BackgroundJob.Enqueue(() => Helpers.CallUrl(url));
         }

@@ -220,7 +220,7 @@ namespace Versus.Controllers
                 // Wyślij wiadomość e-mail z tym łączem
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                mailService.PasswordResetMail(callbackUrl,model);
+                mailService.PasswordResetMail(callbackUrl,model.Email);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }

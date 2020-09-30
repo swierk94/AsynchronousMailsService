@@ -15,10 +15,19 @@ namespace Versus.Models
 
         public string SomeImageContentId { get; set; }
 
-        //public decimal Wartosc { get; set; }
+        public string Topic { get; set; }
 
         public string NumerZamowienia { get; set; }
 
-        // public List<PozycjaZamowienia> PozycjeZamowienia { get; set; }
+        public string Header { get; set; }
+
+        public string MailContent { get; set; }
+        
+        public string Greatings { get; set; }
+        
+        public string Signature { get; set; }
+
+
+
     }
 }
